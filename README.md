@@ -9,4 +9,4 @@ video link
 https://drive.google.com/file/d/1MwKdeD4gkhcpjrNk30dF7BvdRf0bEQxC/view?usp=sharing
 
 Play Game link
-??
+https://thanadonb-collab.github.io/game4/lab04.html
