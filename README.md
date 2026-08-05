@@ -6,7 +6,7 @@
 <img src="docs/demo2.jpg" width="300">
 
 video link
-https://drive.google.com/file/d/1MwKdeD4gkhcpjrNk30dF7BvdRf0bEQxC/view?usp=sharing
+https://drive.google.com/file/d/1Wh-J0a3eZwEoxambtxmJM8SOUW58cKUk/view?usp=sharing
 
 Play Game link
 https://thanadonb-collab.github.io/game4/Lab4.html
