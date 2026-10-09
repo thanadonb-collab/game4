@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://ba4x15g8t2evp"]
+
+[ext_resource type="Script" uid="uid://h5k47dy2lphy" path="res://Scenes/Objects/clam_jump_pad.gd" id="1_68bbf"]
+[ext_resource type="Texture2D" uid="uid://cy5m8hyarkdy2" path="res://Assets/Theme/clam.png" id="2_fa33a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08231"]
+size = Vector2(84, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_110ab"]
+size = Vector2(72, 16)
+
+[node name="ClamJumpPad" type="StaticBody2D"]
+script = ExtResource("1_68bbf")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+position = Vector2(0, -32)
+texture = ExtResource("2_fa33a")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_08231")
+
+[node name="Trigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(0, -34)
+shape = SubResource("RectangleShape2D_110ab")
+
+[connection signal="body_entered" from="Trigger" to="." method="_on_trigger_body_entered"]

@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dt1kjw6arqeyd"]
+
+[ext_resource type="Script" uid="uid://ctq7vfbbnogcu" path="res://Scenes/Traps/bobbing_trap.gd" id="1_738cb"]
+[ext_resource type="Texture2D" uid="uid://cc4yx8ciihtrs" path="res://Assets/Theme/jellyfish.png" id="2_ca0a6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0b548"]
+atlas = ExtResource("2_ca0a6")
+region = Rect2(0, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c833"]
+atlas = ExtResource("2_ca0a6")
+region = Rect2(32, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25750"]
+atlas = ExtResource("2_ca0a6")
+region = Rect2(64, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ff36"]
+atlas = ExtResource("2_ca0a6")
+region = Rect2(96, 0, 32, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_45db3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0b548")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c833")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25750")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ff36")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_588ea"]
+radius = 24
+
+[node name="Jellyfish" type="AnimatableBody2D" groups=["Traps"]]
+collision_layer = 8
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("1_738cb")
+travel = Vector2(0, -110)
+period = 3
+explodes = false
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_45db3")
+autoplay = &"default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_588ea")

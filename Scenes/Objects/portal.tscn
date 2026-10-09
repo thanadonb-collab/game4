@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bet1o8ae5g45q"]
+
+[ext_resource type="Script" uid="uid://clv0q4fp3c00s" path="res://Scenes/Objects/portal.gd" id="1_85cde"]
+[ext_resource type="Texture2D" uid="uid://cw172pdvs8qy6" path="res://Assets/Theme/portal.png" id="2_5f91b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_037bc"]
+atlas = ExtResource("2_5f91b")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_144b5"]
+atlas = ExtResource("2_5f91b")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23ad2"]
+atlas = ExtResource("2_5f91b")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38fd2"]
+atlas = ExtResource("2_5f91b")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44326"]
+atlas = ExtResource("2_5f91b")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f5fe"]
+atlas = ExtResource("2_5f91b")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_62893"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_037bc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_144b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23ad2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38fd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44326")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5f5fe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_71aea"]
+radius = 30
+
+[node name="Portal" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_85cde")
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.6, 1.6)
+position = Vector2(0, -50)
+sprite_frames = SubResource("SpriteFrames_62893")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -40)
+shape = SubResource("CircleShape2D_71aea")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

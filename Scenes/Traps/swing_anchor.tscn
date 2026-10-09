@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://tul1cnf8oru7"]
+
+[ext_resource type="Script" uid="uid://ccieq0b8xd5v5" path="res://Scenes/Traps/swing_anchor.gd" id="1_a1a1b"]
+[ext_resource type="Texture2D" uid="uid://du7rsogy4k6qf" path="res://Assets/Theme/chain.png" id="2_9707b"]
+[ext_resource type="Texture2D" uid="uid://dxyuohp7icy8s" path="res://Assets/Theme/anchor.png" id="3_9e215"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ff4c"]
+size = Vector2(80, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1d616"]
+size = Vector2(14, 60)
+
+[node name="SwingAnchor" type="Node2D"]
+script = ExtResource("1_a1a1b")
+
+[node name="Hook" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_9707b")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Chain" type="TextureRect" parent="Pivot"]
+texture_filter = 1
+texture_repeat = 2
+offset_left = -8
+offset_right = 8
+offset_bottom = 160
+texture = ExtResource("2_9707b")
+expand_mode = 1
+stretch_mode = 1
+mouse_filter = 2
+
+[node name="Anchor" type="AnimatableBody2D" parent="Pivot" groups=["Traps"]]
+position = Vector2(0, 182)
+collision_layer = 8
+collision_mask = 0
+sync_to_physics = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot/Anchor"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("3_9e215")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Anchor"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_0ff4c")
+
+[node name="Shaft" type="CollisionShape2D" parent="Pivot/Anchor"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_1d616")

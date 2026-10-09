@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://by6dwoas88kf0"]
+
+[ext_resource type="Script" uid="uid://ctq7vfbbnogcu" path="res://Scenes/Traps/bobbing_trap.gd" id="1_738cb"]
+[ext_resource type="Texture2D" uid="uid://cpvmeg3geesam" path="res://Assets/Theme/sea_mine.png" id="2_237e1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06dd6"]
+atlas = ExtResource("2_237e1")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15cd9"]
+atlas = ExtResource("2_237e1")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2b413"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06dd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15cd9")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3cd77"]
+radius = 26
+
+[sub_resource type="Gradient" id="Gradient_4c802"]
+colors = PackedColorArray(1, 0.9, 0.4, 1, 1, 0.35, 0.1, 0.8, 0.3, 0.3, 0.35, 0)
+
+[node name="SeaMine" type="AnimatableBody2D" groups=["Traps"]]
+collision_layer = 8
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("1_738cb")
+travel = Vector2(0, -40)
+period = 2.6
+explodes = true
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_2b413")
+autoplay = &"default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_3cd77")
+
+[node name="Boom" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 40
+lifetime = 0.7
+one_shot = true
+explosiveness = 1
+spread = 180
+gravity = Vector2(0, -60)
+initial_velocity_min = 80
+initial_velocity_max = 220
+scale_amount_min = 4
+scale_amount_max = 9
+color_ramp = SubResource("Gradient_4c802")

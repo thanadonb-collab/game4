@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dq7jf34bklvd1"]
+
+[ext_resource type="Script" uid="uid://bev157n1m8b58" path="res://Scenes/Objects/moving_platform.gd" id="1_43de8"]
+[ext_resource type="Texture2D" uid="uid://evbx4asodwb5" path="res://Assets/Theme/raft.png" id="2_2ee72"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bea7"]
+size = Vector2(124, 20)
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+script = ExtResource("1_43de8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+position = Vector2(0, 12)
+texture = ExtResource("2_2ee72")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_0bea7")
+one_way_collision = true

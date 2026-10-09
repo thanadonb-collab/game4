@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c15tw24t3axhb"]
+
+[ext_resource type="Texture2D" uid="uid://bqqtapgw0bxy1" path="res://Assets/BG/BGlose.jpg" id="1_BGlose"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="3_button_exi"]
+[ext_resource type="AudioStream" uid="uid://b8qfh5a7nsi8v" path="res://Assets/Sound/Theme/jingle_lose.wav" id="jingle"]
+
+[node name="GameOver" type="Node2D" unique_id=826370530]
+
+[node name="BGlose" type="Sprite2D" parent="." unique_id=244432285]
+position = Vector2(574.0, 266.0)
+scale = Vector2(1.1230469, 1.3286711)
+texture = ExtResource("1_BGlose")
+
+[node name="Title" type="Label" parent="." unique_id=1965507633]
+offset_left = 419.0
+offset_top = 227.0
+offset_right = 720.0
+offset_bottom = 259.0
+theme = ExtResource("2_theme")
+theme_override_colors/font_color = Color(0.88235295, 0.18039216, 0.1882353, 1.0)
+theme_override_colors/font_outline_color = Color(1.0, 1.0, 1.0, 1.0)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnExit" parent="." unique_id=1633606001 instance=ExtResource("3_button_exi")]
+offset_left = 438.0
+offset_top = 359.0
+offset_right = 564.0
+offset_bottom = 413.0
+text = "Exit to Menu"
+
+[node name="btnPlay" parent="." unique_id=1146872882 instance=ExtResource("3_button_exi")]
+restart_game = true
+offset_left = 597.0
+offset_top = 359.0
+offset_right = 723.0
+offset_bottom = 413.0
+shortcut = null
+text = "Play Again"
+
+[node name="Jingle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("jingle")
+autoplay = true
+bus = &"sfx"

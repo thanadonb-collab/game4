@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://2d3ujm4ol1wu"]
+
+[ext_resource type="PackedScene" uid="uid://d27bcsmx82vfa" path="res://Scenes/Actors/enemy.tscn" id="1_enemy"]
+[ext_resource type="Script" uid="uid://bx5lotsye1r4s" path="res://Scenes/Actors/monster_small.gd" id="2_monster_sm"]
+[ext_resource type="Texture2D" uid="uid://bsdn46ounjdwx" path="res://Assets/Spritesheet/enemy/Walk4.png" id="3_Walk4"]
+
+[sub_resource type="Animation" id="Animation_gfui1"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.49999997),
+"transitions": PackedFloat32Array(1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+"values": [0, 1, 2, 3, 4, 5],
+"update": 1
+}
+
+[sub_resource type="Animation" id="Animation_sxrqx"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.49999997),
+"transitions": PackedFloat32Array(1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+"values": [0, 1, 2, 3, 4, 5],
+"update": 1
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ej0hy"]
+_data = {
+&"RESET": SubResource("Animation_gfui1"),
+&"walk": SubResource("Animation_sxrqx")
+}
+
+[node name="Enemy" unique_id=600502477 instance=ExtResource("1_enemy")]
+script = ExtResource("2_monster_sm")
+
+[node name="CollisionShape2D" parent="." unique_id=587424215 index="0"]
+position = Vector2(0.0, -33.0)
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D2" parent="HitArea" unique_id=2008793250 index="0"]
+position = Vector2(0.0, -33.0)
+scale = Vector2(1.5, 1.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" unique_id=1523470657 index="0"]
+position = Vector2(0.0, -33.0)
+scale = Vector2(2.0, 2.0)
+texture = ExtResource("3_Walk4")
+flip_h = true
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" unique_id=1937827421 index="1"]
+libraries/ = SubResource("AnimationLibrary_ej0hy")
+autoplay = &"walk"

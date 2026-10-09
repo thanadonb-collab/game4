@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://doh8aflqkugpj"]
+
+[ext_resource type="Script" uid="uid://dlsrb11rgmv50" path="res://Scenes/Prefabs/level_finish_door.gd" id="1_02b61"]
+[ext_resource type="Texture2D" uid="uid://6xbmp0gj62ij" path="res://Assets/Theme/chest.png" id="2_69263"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08b01"]
+size = Vector2(80, 80)
+
+[node name="LevelFinishDoor" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_02b61")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+position = Vector2(0, -44)
+texture = ExtResource("2_69263")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_08b01")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

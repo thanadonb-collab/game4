@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b46lxwc5r3dy4"]
+
+[ext_resource type="Texture2D" uid="uid://c30tydl3e51go" path="res://Assets/BG/BGwin.jpg" id="1_BGwin"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="3_button_exi"]
+[ext_resource type="AudioStream" uid="uid://cp2egom5dspxh" path="res://Assets/Sound/Theme/jingle_win.wav" id="jingle"]
+
+[node name="GameOver" type="Node2D" unique_id=826370530]
+
+[node name="BGwin" type="Sprite2D" parent="." unique_id=1346014666]
+position = Vector2(577.0, 268.99997)
+scale = Vector2(1.125, 1.3216784)
+texture = ExtResource("1_BGwin")
+
+[node name="Title" type="Label" parent="." unique_id=1965507633]
+offset_left = 438.0
+offset_top = 225.0
+offset_right = 742.0
+offset_bottom = 269.0
+theme = ExtResource("2_theme")
+theme_override_colors/font_color = Color(0.36862746, 0.9137255, 0.1882353, 1.0)
+theme_override_colors/font_outline_color = Color(1.0, 1.0, 1.0, 1.0)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 33
+text = "You Win"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnExit" parent="." unique_id=1633606001 instance=ExtResource("3_button_exi")]
+offset_left = 438.0
+offset_top = 359.0
+offset_right = 564.0
+offset_bottom = 413.0
+text = "Exit to Menu"
+
+[node name="btnPlay" parent="." unique_id=1146872882 instance=ExtResource("3_button_exi")]
+restart_game = true
+offset_left = 597.0
+offset_top = 359.0
+offset_right = 723.0
+offset_bottom = 413.0
+shortcut = null
+text = "Play Again"
+
+[node name="Jingle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("jingle")
+autoplay = true
+bus = &"sfx"

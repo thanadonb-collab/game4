@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://c8wfn7k0w7nmf"]
+
+[ext_resource type="Script" uid="uid://cwm5w1bxx3js3" path="res://Scenes/Levels/base_level.gd" id="1_b762b"]
+[ext_resource type="PackedScene" uid="uid://doh8aflqkugpj" path="res://Scenes/Prefabs/level_finish_door.tscn" id="2_e51ba"]
+[ext_resource type="PackedScene" uid="uid://w7m6tehvvy3g" path="res://Scenes/Actors/player.tscn" id="3_e070f"]
+[ext_resource type="PackedScene" uid="uid://cdwabmqtlxr1y" path="res://Scenes/Levels/game_ui.tscn" id="4_a03f6"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="5_57483"]
+[ext_resource type="AudioStream" uid="uid://quno756tf2kl" path="res://Assets/Sound/Theme/music_level.wav" id="6_665f2"]
+[ext_resource type="Texture2D" uid="uid://sc2esiveaqkl" path="res://Assets/Theme/bg_lv1.png" id="7_33956"]
+[ext_resource type="Texture2D" uid="uid://dlafybwt1dihb" path="res://Assets/Theme/light_rays.png" id="8_aaa52"]
+[ext_resource type="Texture2D" uid="uid://bpbalmremtjdj" path="res://Assets/Theme/kelp_far.png" id="9_a3f14"]
+[ext_resource type="Texture2D" uid="uid://bqra73vrhtl4j" path="res://Assets/Theme/kelp_near.png" id="10_34cdc"]
+[ext_resource type="Texture2D" uid="uid://ba0whhwgekugs" path="res://Assets/Theme/bubble_small.png" id="11_3e790"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0e1b1"]
+blend_mode = 1
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_b762b")
+background_texture = ExtResource("7_33956")
+music = ExtResource("6_665f2")
+
+[node name="LevelFinishDoor" parent="." instance=ExtResource("2_e51ba")]
+z_index = 1
+position = Vector2(1592, 576)
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Background1" type="Parallax2D" parent="Level"]
+z_index = -20
+scroll_scale = Vector2(0.15, 0)
+repeat_size = Vector2(1300, 0)
+repeat_times = 3
+
+[node name="BG" type="Sprite2D" parent="Level/Background1"]
+centered = false
+texture = ExtResource("7_33956")
+scale = Vector2(1, 1.02)
+
+[node name="Background2" type="Parallax2D" parent="Level"]
+z_index = -19
+scroll_scale = Vector2(0.3, 0)
+repeat_size = Vector2(1024, 0)
+repeat_times = 3
+
+[node name="Rays" type="Sprite2D" parent="Level/Background2"]
+centered = false
+texture = ExtResource("8_aaa52")
+material = SubResource("CanvasItemMaterial_0e1b1")
+
+[node name="Background3" type="Parallax2D" parent="Level"]
+z_index = -18
+scroll_scale = Vector2(0.5, 0)
+repeat_size = Vector2(1024, 0)
+repeat_times = 3
+
+[node name="KelpFar" type="Sprite2D" parent="Level/Background3"]
+centered = false
+position = Vector2(0, 388)
+texture = ExtResource("9_a3f14")
+
+[node name="Foreground" type="Parallax2D" parent="Level"]
+z_index = 5
+scroll_scale = Vector2(1.3, 0)
+repeat_size = Vector2(1024, 0)
+repeat_times = 3
+modulate = Color(1, 1, 1, 0.55)
+
+[node name="KelpNear" type="Sprite2D" parent="Level/Foreground"]
+centered = false
+position = Vector2(0, 488)
+texture = ExtResource("10_34cdc")
+
+[node name="Player" parent="." instance=ExtResource("3_e070f")]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(80, 572)
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="."]
+z_index = 2
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="UserInterface" parent="." instance=ExtResource("4_a03f6")]
+
+[node name="Label" type="Label" parent="UserInterface"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400
+offset_top = -60
+offset_right = 400
+offset_bottom = 60
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(400, 60)
+theme = ExtResource("5_57483")
+theme_override_colors/font_outline_color = Color(0.05, 0.1, 0.2, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 56
+text = "Level"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Text" type="Node2D" parent="."]
+
+[node name="Ambient" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enabled = false
+
+[node name="Bubbles" type="CPUParticles2D" parent="Ambient"]
+position = Vector2(576, 680)
+amount = 28
+lifetime = 7
+preprocess = 7
+texture = ExtResource("11_3e790")
+texture_filter = 1
+emission_shape = 3
+emission_rect_extents = Vector2(600, 10)
+direction = Vector2(0, -1)
+spread = 8
+gravity = Vector2(0, 0)
+initial_velocity_min = 40
+initial_velocity_max = 110
+scale_amount_min = 1
+scale_amount_max = 2.5
+modulate = Color(1, 1, 1, 0.6)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_665f2")
+volume_db = -6
+bus = &"music"
+
+[connection signal="hit_enemy" from="Player" to="." method="_on_player_hit_enemy"]
+[connection signal="hit_trap" from="Player" to="." method="_on_player_hit_trap"]
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
