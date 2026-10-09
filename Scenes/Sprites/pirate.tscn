@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bqljvb2m1qppq"]
 
 [ext_resource type="Texture2D" uid="uid://c6fj1tidtu5xy" path="res://Assets/Theme/pirate_player.png" id="1_e9771"]
+[ext_resource type="Texture2D" uid="uid://ba0whhwgekugs" path="res://Assets/Theme/bubble_small.png" id="2_3e790"]
 
 [sub_resource type="Animation" id="Animation_04de2"]
 resource_name = "Idle"
@@ -106,3 +107,19 @@ offset = Vector2(-0.5, -20)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries/ = SubResource("AnimationLibrary_560a3")
 autoplay = &"Idle"
+
+[node name="Breath" type="CPUParticles2D" parent="."]
+position = Vector2(10, -50)
+amount = 3
+lifetime = 1.6
+explosiveness = 0.6
+texture = ExtResource("2_3e790")
+texture_filter = 1
+direction = Vector2(0.3, -1)
+spread = 20
+gravity = Vector2(0, -40)
+initial_velocity_min = 15
+initial_velocity_max = 35
+scale_amount_min = 0.8
+scale_amount_max = 1.6
+modulate = Color(1, 1, 1, 0.8)
