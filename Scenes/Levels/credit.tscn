@@ -101,4 +101,4 @@ vertical_alignment = 1
 
 [node name="PirateArt" parent="Control" instance=ExtResource("pirate_art")]
 position = Vector2(330, 470)
-scale = Vector2(2.2, 2.2)
+scale = Vector2(1.6, 1.6)

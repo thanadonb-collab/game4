@@ -98,7 +98,7 @@ position = Vector2(1744, 248)
 position = Vector2(1776, 248)
 
 [node name="Urchin2" parent="Traps" instance=ExtResource("6_54cb7")]
-position = Vector2(1904, 512)
+position = Vector2(1872, 512)
 
 [node name="Urchin3" parent="Traps" instance=ExtResource("6_54cb7")]
 position = Vector2(1936, 512)

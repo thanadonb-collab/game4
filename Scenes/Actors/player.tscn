@@ -85,7 +85,7 @@ scale = Vector2(1.0000001, 1.0000001)
 texture = ExtResource("4_light_w")
 
 [node name="Pirate" parent="." unique_id=1717188345 instance=ExtResource("5_student")]
-position = Vector2(-0.9982939, 4.0004263)
+position = Vector2(0.0, 2.0)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1467812523]
 limit_smoothed = true
@@ -98,8 +98,6 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="BulletMarker" type="Marker2D" parent="." unique_id=511055809]
-position = Vector2(42.0, -44.0)
+position = Vector2(44.0, -38.0)
 
 [connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]
-
-[editable path="student"]
