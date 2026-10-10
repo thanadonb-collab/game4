@@ -72,7 +72,9 @@ position = Vector2(848, 472)
 position = Vector2(880, 472)
 
 [node name="SeaMine1" parent="Traps" instance=ExtResource("8_aed8a")]
-position = Vector2(912, 452)
+position = Vector2(912, 472)
+travel = Vector2(0, -110)
+period = 2.8
 
 [node name="Jellyfish1" parent="Traps" instance=ExtResource("9_47b12")]
 position = Vector2(1360, 462)

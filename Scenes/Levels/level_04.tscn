@@ -177,10 +177,14 @@ position = Vector2(3568, 224)
 target = NodePath("../Portal4")
 
 [node name="SeaMine2" parent="Traps" instance=ExtResource("8_aed8a")]
-position = Vector2(3504, 467)
+position = Vector2(3504, 472)
+travel = Vector2(0, -110)
+period = 2.4
 
 [node name="SeaMine3" parent="Traps" instance=ExtResource("8_aed8a")]
-position = Vector2(3600, 467)
+position = Vector2(3600, 472)
+travel = Vector2(0, -110)
+period = 2.4
 phase = 0.5
 
 [node name="Portal4" parent="Objects" instance=ExtResource("18_94dd6")]

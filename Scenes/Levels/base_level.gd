@@ -6,6 +6,8 @@ extends Node2D
 @export var level_width: float = 4000.0
 @export var level_height: float = 704.0
 @export var music: AudioStream
+## HP lost when a trap hits the pirate (falling into a pit still costs a life).
+@export var trap_damage: int = 20
 
 func _ready() -> void:
 	GameManager.player = %Player
@@ -31,13 +33,13 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	var p = %Player
 	if p.movement_enabled and p.global_position.y > level_height + 64:
-		_on_player_hit_trap()
+		GameManager.death()
 
 func _on_player_hit_enemy() -> void:
 	GameManager.damage(5)
 
 func _on_player_hit_trap() -> void:
-	GameManager.death()
+	GameManager.damage(trap_damage)
 
 func _on_music_player_finished() -> void:
 	$MusicPlayer.play(0)

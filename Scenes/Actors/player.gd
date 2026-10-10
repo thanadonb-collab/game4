@@ -52,6 +52,12 @@ func _ready() -> void:
 func _physics_process(_delta):
 	is_grounded = is_on_floor()
 	movement()
+	# still touching a trap when the invincibility ends -> take another hit
+	if can_damage and movement_enabled:
+		for b in $Collision.get_overlapping_bodies():
+			if b.is_in_group("Traps"):
+				hurt_by_trap(b)
+				break
 
 func _process(_delta):
 	player_animations()
@@ -79,8 +85,6 @@ func movement():
 			velocity.x = -move_speed
 		if Input.is_action_pressed("Right"):
 			velocity.x = move_speed
-	if velocity.y > 5000:
-		hit_trap.emit()
 	move_and_slide()
 
 
@@ -161,10 +165,8 @@ func damage_tween():
 
 func _on_collision_body_entered(body):
 	if body.is_in_group("Traps"):
-		if body.has_method("trigger"):
-			body.trigger()
-		if movement_enabled:
-			hit_trap.emit()
+		hurt_by_trap(body)
+		return
 	if !can_damage: return
 	if body.is_in_group("Enemy"):
 		var dx = body.position.x - position.x
@@ -230,3 +232,18 @@ func apply_boost(kind: String, multiplier: float, duration: float) -> void:
 		jump_force = base_jump_force
 	if boost_timers.is_empty():
 		player_node.modulate = Color.WHITE
+
+## Traps cost HP (see base_level.trap_damage) instead of killing instantly.
+## Short knockback, then ~1.8 s of invincibility while the pirate flashes red.
+func hurt_by_trap(body) -> void:
+	if !can_damage or !movement_enabled:
+		return
+	var away = sign(global_position.x - body.global_position.x)
+	if away == 0:
+		away = -1.0 if player_node.scale.x > 0 else 1.0
+	velocity = Vector2(140.0 * away, -330.0)
+	AudioManager.play_sfx("hurt")
+	if body.has_method("trigger"):
+		body.trigger()   # sea mines explode only when they actually hit
+	damage_tween()
+	hit_trap.emit()

@@ -149,6 +149,8 @@ direction = -1
 
 [node name="SeaMine1" parent="Traps" instance=ExtResource("15_aed8a")]
 position = Vector2(3728, 536)
+travel = Vector2(0, -110)
+period = 3
 
 [node name="Coin19" parent="Coins" instance=ExtResource("5_29eb9")]
 position = Vector2(4016, 536)
